@@ -4,7 +4,7 @@ from dataset.dataset import get_dataloaders
 from models.customnet import CustomNet2
 from eval import validate
 
-def train_epoch(epoch, model, train_loader, criterion, optimizer):
+def train_epoch(device, epoch, model, train_loader, criterion, optimizer):
     model.train()
     running_loss = 0.0
     correct = 0
@@ -13,7 +13,8 @@ def train_epoch(epoch, model, train_loader, criterion, optimizer):
     size = len(train_loader.dataset)
 
     for batch_idx, (inputs, targets) in enumerate(train_loader):
-        inputs, targets = inputs.cuda(), targets.cuda()
+        if device == 'cuda':
+          inputs, targets = inputs.cuda(), targets.cuda()
 
         outputs = model(inputs)
         loss = criterion(outputs, targets)
@@ -53,7 +54,7 @@ def main():
     for epoch in range(1, num_epochs + 1):
         print('\nEpoch %d\n--------------------------' % epoch)
 
-        train_epoch(epoch, model, train_loader, criterion, optimizer)
+        train_epoch(device, epoch, model, train_loader, criterion, optimizer)
 
         # At the end of each training iteration, perform a validation step
         val_accuracy = validate(model, val_loader, criterion)
