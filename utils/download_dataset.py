@@ -9,13 +9,13 @@ def download_tiny_imagenet_colab(data_dir='data'):
         return
     
     print('Downloading Tiny-ImageNet...')
-    os.system('!wget -q --show-progress http://cs231n.stanford.edu/tiny-imagenet-200.zip')
+    os.system('wget -q --show-progress http://cs231n.stanford.edu/tiny-imagenet-200.zip')
     
     print('\nExtracting dataset...')
-    os.system('!unzip -q tiny-imagenet-200.zip -d {data_dir}')
+    os.system(f'unzip -q tiny-imagenet-200.zip -d {data_dir}')
     
     print('\nRemoving zip...')
-    os.system('!rm tiny-imagenet-200.zip')
+    os.system('rm tiny-imagenet-200.zip')
     
     print(f'Dataset ready at: {dataset_path}')
 
