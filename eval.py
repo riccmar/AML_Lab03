@@ -23,4 +23,4 @@ def validate(model, val_loader, criterion):
 
     print(f'Validation Loss: {val_loss:.6f} Acc: {val_accuracy:.2f}%')
     
-    return val_accuracy
+    return val_loss, val_accuracy
